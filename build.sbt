@@ -38,7 +38,8 @@ lazy val client =
       scalaVersion := "2.12.6", //2.12.7 breaks with react-router!!
 
       libraryDependencies ++= Seq(
-        "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1"
+        "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
+        "com.github.japgolly.scalajs-react" %%% "extra" % "1.3.1"
       ),
 
       jsDependencies ++= Seq(
