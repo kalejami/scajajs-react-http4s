@@ -1,10 +1,12 @@
 package de.mk.sjsreacthttp4s
 
-import japgolly.scalajs.react.extra.router.{BaseUrl, Redirect, Resolution, Router, RouterConfigDsl, RouterCtl}
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.component.Scala.Unmounted
 import japgolly.scalajs.react.extra.OnUnmount
+import japgolly.scalajs.react.extra.router.{BaseUrl, Redirect, Resolution, Router, RouterConfigDsl, RouterCtl}
 import japgolly.scalajs.react.vdom.html_<^._
+import scalacss.ScalaCssReact._
+
 
 object Routes {
   sealed trait Page
@@ -28,25 +30,25 @@ object Routes {
   private def masterPage(ctl: RouterCtl[Page], r: Resolution[Page]) =
     <.div(
       Navigation(ctl, r),
-      <.div(^.className := "container", r.render())
+      <.div(BootstrapCss.container, r.render())
     )
 
   object Navigation {
 
     private def navElement(c: RouterCtl[Page], page: Page, name: String, isActive: Boolean) =
-      <.li(^.className := "nav-item", (^.className := "active").when(isActive),
-        <.a(^.className := "nav-link", ^.onClick --> c.set(page), name)
+      <.li(BootstrapCss.navItem, BootstrapCss.active.when(isActive),
+        <.a(BootstrapCss.navLink, ^.onClick --> c.set(page), name)
       )
 
     private val component = ScalaComponent.builder[(RouterCtl[Page], Resolution[Page])]("Navigation")
       .render_P(prop =>
         <.nav(
-          ^.className := "navbar navbar-expand-sm navbar-light bg-light",
-          <.span(^.className := "navbar-brand", "Template"),
+          BootstrapCss.navBar,
+          <.span(BootstrapCss.navBarBrand, "Template"),
           <.div(
-            ^.className := "collapse navbar-collapse",
+            BootstrapCss.navBarCollapse,
             <.ul(
-              ^.className := "navbar-nav",
+              BootstrapCss.navBarNav,
               navElement(prop._1, Home, "Home", prop._2.page == Home),
               navElement(prop._1, About, "About", prop._2.page == About)
             )
