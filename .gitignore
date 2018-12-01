@@ -1,0 +1,6 @@
+/.idea
+client/target
+project/target
+project/project/target
+server/target
+target/
