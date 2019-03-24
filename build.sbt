@@ -1,10 +1,14 @@
 val http4sVersion = "0.18.11"
+val scalaversion = "2.12.8"
+val scalajsreactversion = "1.4.1"
+val reactversion = "16.7.0"
+val scalacssversion = "0.5.5"
 
 lazy val root = project.in(file(".")).aggregate(client).aggregate(server)
 
 lazy val server = project.in(file("server"))
   .settings(
-    scalaVersion := "2.12.7",
+    scalaVersion := scalaversion,
 
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-dsl" % http4sVersion,
@@ -35,22 +39,22 @@ lazy val client =
     .in(file("client"))
     .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
     .settings(
-      scalaVersion := "2.12.6", //2.12.7 breaks with react-router!!
+      scalaVersion := scalaversion,
 
       libraryDependencies ++= Seq(
-        "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
-        "com.github.japgolly.scalajs-react" %%% "extra" % "1.3.1",
-        "com.github.japgolly.scalacss" %%% "ext-react" % "0.5.3",
-        "com.github.japgolly.scalacss" %%% "core" % "0.5.3"
+        "com.github.japgolly.scalajs-react" %%% "core" % scalajsreactversion,
+        "com.github.japgolly.scalajs-react" %%% "extra" % scalajsreactversion,
+        "com.github.japgolly.scalacss" %%% "ext-react" % scalacssversion,
+        "com.github.japgolly.scalacss" %%% "core" % scalacssversion
       ),
 
       jsDependencies ++= Seq(
-        "org.webjars.npm" % "react" % "16.6.3"
+        "org.webjars.npm" % "react" % reactversion
           /        "umd/react.development.js"
           minified "umd/react.production.min.js"
           commonJSName "React",
 
-        "org.webjars.npm" % "react-dom" % "16.6.3"
+        "org.webjars.npm" % "react-dom" % reactversion
           /         "umd/react-dom.development.js"
           minified  "umd/react-dom.production.min.js"
           dependsOn "umd/react.development.js"
